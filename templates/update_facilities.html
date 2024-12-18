@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Facilities</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            padding: 20px;
+            margin: 0;
+        }
+        h2 {
+            text-align: center;
+            color: #003c6c;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group select, .form-group button {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .form-group button {
+            background-color: #3ba776;
+            color: white;
+            border: none;
+        }
+        .form-group button:hover {
+            background-color: #2f8d63;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 14px;
+            color: #555;
+        }
+        .logout-container {
+            text-align: right;
+            padding: 10px 20px;
+        }
+        
+        .logout-button {
+            background-color: #d9534f; /* Red background for contrast */
+            color: #fff; /* White text */
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .logout-button:hover {
+            background-color: #c9302c; /* Darker red for hover effect */
+            transform: scale(1.05); /* Slightly larger on hover */
+        }
+        
+        .logout-button:active {
+            background-color: #ac2925; /* Even darker red on click */
+            transform: scale(1); /* Reset size on click */
+        }
+        
+        @media (max-width: 600px) {
+            .logout-container {
+                text-align: center;
+                padding: 5px 10px;
+            }
+        
+            .logout-button {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .form-group select, .form-group button {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Update Facility Status</h2>
+    <div class="container">
+        <form method="POST">
+            <div class="form-group">
+                <label for="facility_name">Select Facility:</label>
+                <select id="facility_name" name="facility_name" required>
+                    {% for facility in facilities %}
+                    <option value="{{ facility }}">{{ facility }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="open">Open</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Update Status</button>
+            </div>
+        </form>
+        <div class="logout-container">
+            <form action="/logout" method="POST">
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 IITM CMGFS
+    </footer>
+</body>
+</html>

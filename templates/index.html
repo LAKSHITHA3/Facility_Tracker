@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IITM Facilities Status</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc; /* Light gray-blue background */
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #003c6c; /* Dark blue from CMGFS logo */
+            color: white;
+            padding: 15px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            height: 50px; /* Adjust height as needed */
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 15px;
+        }
+        .container {
+            margin: 20px auto;
+            max-width: 800px;
+        }
+        .facility {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .facility.open {
+            border-left: 5px solid #3ba776; /* Green from CMGFS logo */
+        }
+        .facility.closed {
+            border-left: 5px solid #e63946; /* Red for closed */
+        }
+        .facility-name {
+            font-size: 18px;
+        }
+        footer {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='iitm logo.jpeg') }}" alt="IITM Logo" class="logo">
+        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #003c6c; padding: 15px;">
+            <span style="color: white; font-size: 20px; font-weight: bold;">IITM Facility Tracker</span>
+        </div>
+        <img src="{{ url_for('static', filename='cmgfs_logo.png') }}" alt="CMGFS Logo" class="logo">
+    </header>
+    <div class="container" id="facility-container"></div>
+    <footer>
+        &copy; 2024 IITM CMGFS
+    </footer>
+    <script>
+        async function loadFacilities() {
+            const response = await fetch('/api/facilities');
+            const facilities = await response.json();
+            const container = document.getElementById('facility-container');
+            container.innerHTML = '';
+
+            facilities.forEach(facility => {
+                const div = document.createElement('div');
+                div.className = `facility ${facility.status}`;
+                div.innerHTML = `
+                    <span class="facility-name">${facility.name}</span>
+                    <span>${facility.status === 'open' ? 'Open' : 'Closed'}</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+        loadFacilities();
+    </script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #003c6c;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            flex-grow: 1;
+            margin: 0;
+        }
+
+        .logo-container {
+            display: flex;
+            gap: 15px;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .logo {
+            width: 60px;
+            height: auto;
+            border-radius: 10%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #003c6c;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3ba776;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #003c6c;
+            color: white;
+            margin-top: 200px;
+        }
+
+        @media (max-width: 600px) {
+            .login-container {
+                margin: 20px auto;
+                padding: 15px;
+                width: 90%;
+            }
+            .form-group input {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="header-title">CMGFS Facility Tracker</h1>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='cmgfs_logo.png') }}" alt="CMGFS Logo" class="logo">
+        </div>
+    </header>
+    <div class="login-container">
+        <h2>Vendor Login</h2>
+        <form action="/vendor" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    <footer>
+        &copy; 2024 CMGFS. All rights reserved.
+    </footer>
+</body>
+</html>
